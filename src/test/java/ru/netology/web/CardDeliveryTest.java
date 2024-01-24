@@ -102,7 +102,7 @@ class CardDeliveryTest {
         //String meetingDateString = meetingDate.format(timeFormatter);
 
         $("[data-test-id='city'] input").setValue("Новосибирск");
-        String meetingDate = generateDate(10, "dd.MM.yyyy");
+        String meetingDate = generateDate(1, "dd.MM.yyyy");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.DELETE);
         $("[data-test-id='date'] input").setValue(meetingDate);
         $("[data-test-id='name'] input").setValue("Красовский Алексей");
