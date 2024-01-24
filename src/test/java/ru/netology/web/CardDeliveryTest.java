@@ -1,6 +1,7 @@
 package ru.netology.web;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -157,5 +158,19 @@ class CardDeliveryTest {
         $("[data-test-id='phone'] input").setValue("+79130000000");
         $(".button").click();
         $("[data-test-id='agreement'] .checkbox__text").shouldBe(visible);
+    }
+
+    @Test
+    void shouldSelectCityFromList() {
+        $("[data-test-id='city'] input").setValue("Но");
+        $(byText("Новосибирск")).click();
+        $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.DELETE);
+        $("[data-test-id='date'] input").setValue(meetingDateString);
+        $("[data-test-id='name'] input").setValue("Красовский Алексей");
+        $("[data-test-id='phone'] input").setValue("+79139999999");
+        $("[data-test-id='agreement']").click();
+        $(".button").click();
+        $("[data-test-id='notification'] .notification__title").shouldHave(exactText("Успешно!"), Duration.ofSeconds(15));
+        $("[data-test-id='notification'] .notification__content").shouldHave(exactText("Встреча успешно забронирована на " + meetingDateString));
     }
 }
